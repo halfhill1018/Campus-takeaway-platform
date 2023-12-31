@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduation.campustakeawayplatform.domain.repository.mapper.OrderMainMapper">
+
+    <resultMap id="BaseResultMap" type="com.graduation.campustakeawayplatform.domain.repository.PO.OrderMainPO">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="orderNumber" column="order_number" jdbcType="VARCHAR"/>
+            <result property="buyerId" column="buyer_id" jdbcType="VARCHAR"/>
+            <result property="sellerId" column="seller_id" jdbcType="VARCHAR"/>
+            <result property="orderStatus" column="order_status" jdbcType="VARCHAR"/>
+            <result property="orderType" column="order_type" jdbcType="VARCHAR"/>
+            <result property="orderSnapshotId" column="order_snapshot_id" jdbcType="VARCHAR"/>
+            <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+            <result property="lastUpdateDate" column="last_update_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,order_number,buyer_id,
+        seller_id,order_status,order_type,
+        order_snapshot_id,create_date,last_update_date
+    </sql>
+</mapper>
