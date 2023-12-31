@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: Campus-takeaway-platform
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: Root123456
+    url: jdbc:mysql://rm-cn-lbj3jpek0000q13o.rwlb.rds.aliyuncs.com:3306/graduation? useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+
+
+    druid:
+      time-between-eviction-runs-millis: 60000
+      max-wait: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      testOnBorrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      initial-size: 5
+      max-active: 20
+      min-idle: 5
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
