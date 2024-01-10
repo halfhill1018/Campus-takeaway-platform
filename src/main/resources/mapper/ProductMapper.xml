@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduation.campustakeawayplatform.domain.repository.mapper.ProductMapper">
+
+    <resultMap id="BaseResultMap" type="com.graduation.campustakeawayplatform.domain.repository.PO.ProductPO">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+            <result property="productType" column="product_type" jdbcType="VARCHAR"/>
+            <result property="productDesc" column="product_desc" jdbcType="VARCHAR"/>
+            <result property="productPrice" column="product_price" jdbcType="DECIMAL"/>
+            <result property="productNventory" column="product_nventory" jdbcType="VARCHAR"/>
+            <result property="productSnapshot" column="product_snapshot" jdbcType="VARCHAR"/>
+            <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+            <result property="lastUpdateDate" column="last_update_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,product_name,product_type,
+        product_desc,product_price,product_nventory,
+        product_snapshot,create_date,last_update_date
+    </sql>
+</mapper>
