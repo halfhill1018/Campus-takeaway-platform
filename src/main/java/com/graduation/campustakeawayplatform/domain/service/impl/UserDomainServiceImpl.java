@@ -20,4 +20,9 @@ public class UserDomainServiceImpl implements UserDomainService {
     public String signIn(UserPO userPO) {
         return userService.signIn(userPO);
     }
+
+    @Override
+    public String login(UserPO userPO) {
+        return userService.login(userPO);
+    }
 }

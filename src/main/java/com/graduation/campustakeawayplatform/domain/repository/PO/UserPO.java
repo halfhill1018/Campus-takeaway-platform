@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
+
 import lombok.Data;
 
 /**
@@ -128,5 +130,12 @@ public class UserPO implements Serializable {
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
+    }
+
+    public boolean checkAccount(UserPO userPO){
+        if (Objects.isNull(userPO.getLoginName()) || Objects.isNull(userPO.getPassWord())){
+            return false;
+        }
+        return true;
     }
 }

@@ -27,4 +27,11 @@ public class UserApplicationServiceImpl implements UserApplicationService {
         logger.info("注册参数:{}", JSON.toJSONString(userPO));
         return userDomainService.signIn(userPO);
     }
+
+    @Override
+    public String login(UserPO userPO) {
+        logger.info("登录参数: {}",JSON.toJSONString(userPO));
+
+        return userDomainService.login(userPO);
+    }
 }

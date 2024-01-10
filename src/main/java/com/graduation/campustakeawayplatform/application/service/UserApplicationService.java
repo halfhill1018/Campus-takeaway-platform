@@ -9,4 +9,6 @@ import com.graduation.campustakeawayplatform.domain.repository.PO.UserPO;
  */
 public interface UserApplicationService {
     String signIn(UserPO userPO);
+
+    String login(UserPO userPO);
 }

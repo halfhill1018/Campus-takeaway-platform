@@ -12,5 +12,7 @@ public interface UserService extends IService<UserPO> {
 
     String signIn(UserPO userPO);
 
+    String login(UserPO userPO);
+
 
 }

@@ -17,6 +17,9 @@ public interface SellerMapper extends BaseMapper<SellerPO> {
 
     List<SellerPO> selectShopNameById(@Param("id") String id);
 
+    List<SellerPO> selectAll();
+
+
 }
 
 

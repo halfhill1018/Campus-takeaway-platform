@@ -55,4 +55,10 @@ values
 <if test="lastUpdateDate != null">#{lastUpdateDate,jdbcType=TIMESTAMP},</if>
 </trim>
 </insert>
+    <select id="selectPassWordByLoginName" resultMap="BaseResultMap">
+        select pass_word
+        from user
+        where
+        login_name = #{loginName,jdbcType=VARCHAR}
+    </select>
 </mapper>

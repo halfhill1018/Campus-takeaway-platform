@@ -11,4 +11,6 @@ public interface UserDomainService {
 
     String signIn(UserPO userPO);
 
+    String login(UserPO userPO);
+
 }

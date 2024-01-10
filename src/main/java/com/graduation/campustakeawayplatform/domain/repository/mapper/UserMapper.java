@@ -20,6 +20,8 @@ public interface UserMapper extends BaseMapper<UserPO> {
 
     int insertSelective(UserPO userPO);
 
+    UserPO selectPassWordByLoginName(@Param("loginName") String loginName);
+
 }
 
 
