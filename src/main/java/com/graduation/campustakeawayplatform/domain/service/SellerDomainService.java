@@ -3,7 +3,7 @@ package com.graduation.campustakeawayplatform.domain.service;
 import com.graduation.campustakeawayplatform.domain.repository.PO.ProductPO;
 
 /**
- * @Author HuangShen
+ * @Author qinziwen
  * @Date 2024/1/10 19:15
  * @Describe
  */

@@ -17,7 +17,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,seller_id,product_name,product_type,
+        id,seller_id,product_name,product_type,product_status,
         product_desc,product_price,product_nventory,
         product_snapshot,create_date,last_update_date
     </sql>
@@ -25,6 +25,8 @@
         select
         <include refid="Base_Column_List"/>
         from product
+        where product_status = 0
+        limit #{pageParam.pageNo},#{pageParam.pageSize}
     </select>
     <select id="selectAllBySellerId" resultMap="BaseResultMap">
         select

@@ -1,4 +1,5 @@
 package com.graduation.campustakeawayplatform.domain.repository.mapper;
+import com.graduation.campustakeawayplatform.common.Reuqest.RequestPageParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -7,7 +8,7 @@ import com.graduation.campustakeawayplatform.domain.repository.PO.ProductPO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
-* @author huangshen
+* @author qinziwen
 * @description 针对表【product】的数据库操作Mapper
 * @createDate 2024-01-10 18:58:37
 * @Entity com.graduation.campustakeawayplatform.domain.repository.PO.ProductPO
@@ -23,10 +24,10 @@ public interface ProductMapper extends BaseMapper<ProductPO> {
     int insertSelective(ProductPO productPO);
 
     /**
-     * 获取所有商品
+     * 获取所有生效的商品
      * @return
      */
-    List<ProductPO> selectAll();
+    List<ProductPO> selectAll(@Param("pageParam") RequestPageParam pageParam);
 
     /**
      * 根据卖家id获取商品
@@ -67,6 +68,11 @@ public interface ProductMapper extends BaseMapper<ProductPO> {
      */
     int updateProductStatusByIdAndSellerId(@Param("productStatus") Integer productStatus, @Param("id") String id, @Param("sellerId") String sellerId);
 
+    /**
+     * 根据商品id获取商品状态
+     * @param id
+     * @return
+     */
     ProductPO selectProductStatusById(@Param("id") String id);
 
 }

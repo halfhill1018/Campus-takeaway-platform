@@ -1,7 +1,7 @@
 package com.graduation.campustakeawayplatform.cofig;
 
 /**
- * @Author HuangShen
+ * @Author qinziwen
  * @Date 2024/1/10 17:10
  * @Describe
  */

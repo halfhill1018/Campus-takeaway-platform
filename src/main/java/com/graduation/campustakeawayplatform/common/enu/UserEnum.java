@@ -1,7 +1,7 @@
 package com.graduation.campustakeawayplatform.common.enu;
 
 /**
- * @Author HuangShen
+ * @Author qinziwen
  * @Date 2024/1/11 14:34
  * @Describe
  */

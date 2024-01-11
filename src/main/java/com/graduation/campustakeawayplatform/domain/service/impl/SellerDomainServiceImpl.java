@@ -5,21 +5,25 @@ import com.graduation.campustakeawayplatform.common.hutool.IdGenerator;
 import com.graduation.campustakeawayplatform.domain.repository.PO.ProductPO;
 import com.graduation.campustakeawayplatform.domain.repository.service.SellerService;
 import com.graduation.campustakeawayplatform.domain.service.SellerDomainService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-
 import javax.annotation.Resource;
 import java.util.Objects;
 
 /**
- * @Author HuangShen
+ * @Author qinziwen
  * @Date 2024/1/10 19:15
  * @Describe 领域层，负责操作领域，返回的是整个领域模型
  *
  */
 @Service
 public class SellerDomainServiceImpl implements SellerDomainService {
+
+    Logger logger = LoggerFactory.getLogger(SellerDomainServiceImpl.class);
+
 
     @Resource
     SellerService sellerService;
@@ -67,6 +71,10 @@ public class SellerDomainServiceImpl implements SellerDomainService {
 
     }
 
+    /**
+     * 第一次上架时的检查
+     * @param productPO
+     */
     public void checkProductInfo(ProductPO productPO){
         if (Objects.isNull(productPO.getSellerId()) ||
                 Objects.isNull(productPO.getProductPrice()) || Objects.isNull(productPO.getProductName())){

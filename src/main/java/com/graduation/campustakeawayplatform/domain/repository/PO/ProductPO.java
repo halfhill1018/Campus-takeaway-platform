@@ -1,5 +1,6 @@
 package com.graduation.campustakeawayplatform.domain.repository.PO;
 
+import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -7,6 +8,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
+
 import lombok.Data;
 
 /**
@@ -65,12 +68,12 @@ public class ProductPO implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime createDate;
+    private Date createDate;
 
     /**
      * 最后更新时间
      */
-    private LocalDateTime lastUpdateDate;
+    private Date lastUpdateDate;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

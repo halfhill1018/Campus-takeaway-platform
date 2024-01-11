@@ -4,6 +4,8 @@ import com.graduation.campustakeawayplatform.common.hutool.IdGenerator;
 import com.graduation.campustakeawayplatform.domain.repository.PO.UserPO;
 import com.graduation.campustakeawayplatform.domain.repository.service.UserService;
 import com.graduation.campustakeawayplatform.domain.service.UserDomainService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,6 +17,9 @@ import javax.annotation.Resource;
  */
 @Service("userDomainServiceImpl")
 public class UserDomainServiceImpl implements UserDomainService {
+    Logger logger = LoggerFactory.getLogger(UserDomainServiceImpl.class);
+
+
     @Resource
     UserService userService;
 
