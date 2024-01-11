@@ -2,6 +2,7 @@ package com.graduation.campustakeawayplatform.domain.repository.mapper;
 
 import com.graduation.campustakeawayplatform.domain.repository.PO.OrderMainPO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author he
@@ -9,6 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2023-12-31 19:23:15
 * @Entity com.graduation.campustakeawayplatform.domain.repository.repository.OrderMainPO
 */
+@Mapper
 public interface OrderMainMapper extends BaseMapper<OrderMainPO> {
 
 }

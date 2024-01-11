@@ -23,6 +23,11 @@ public class ProductPO implements Serializable {
     private String id;
 
     /**
+     * 卖家id
+     */
+    private String sellerId;
+
+    /**
      * 商品名
      */
     private String productName;
@@ -31,6 +36,11 @@ public class ProductPO implements Serializable {
      * 商品分类
      */
     private String productType;
+
+    /**
+     * 商品状态
+     */
+    private Integer productStatus;
 
     /**
      * 商品描述

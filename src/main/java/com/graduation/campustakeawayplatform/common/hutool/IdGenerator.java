@@ -18,8 +18,8 @@ public class IdGenerator {
         this.snowflake = new Snowflake(1, 1);
     }
 
-    public long generateId() {
-        return snowflake.nextId();
+    public String generateId() {
+        return String.valueOf(snowflake.nextId());
     }
 }
 

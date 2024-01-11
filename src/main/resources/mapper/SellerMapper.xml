@@ -58,4 +58,8 @@ id = #{id,jdbcType=VARCHAR}
         <include refid="Base_Column_List"/>
         from seller
     </select>
+    <select id="selectIdAndShopName" resultMap="BaseResultMap">
+        select id, shop_name
+        from seller
+    </select>
 </mapper>

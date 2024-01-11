@@ -17,8 +17,116 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,product_name,product_type,
+        id,seller_id,product_name,product_type,
         product_desc,product_price,product_nventory,
         product_snapshot,create_date,last_update_date
     </sql>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product
+    </select>
+    <select id="selectAllBySellerId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product
+        where
+        seller_id = #{sellerId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAllByProductType" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product
+        where
+        product_type = #{productType,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAllByProductName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product
+        where
+        product_name = #{productName,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAllByProductNameAndSellerId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product
+        where
+        product_name = #{productName,jdbcType=VARCHAR}
+        AND seller_id = #{sellerId,jdbcType=VARCHAR}
+    </select>
+    <insert id="insertSelective">
+        insert into product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="sellerId != null">
+                seller_id,
+            </if>
+            <if test="productName != null">
+                product_name,
+            </if>
+            <if test="productStatus != null">
+                product_status,
+            </if>
+            <if test="productType != null">
+                product_type,
+            </if>
+            <if test="productDesc != null">
+                product_desc,
+            </if>
+            <if test="productPrice != null">
+                product_price,
+            </if>
+            <if test="productNventory != null">
+                product_nventory,
+            </if>
+            <if test="productSnapshot != null">
+                product_snapshot,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="lastUpdateDate != null">
+                last_update_date,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerId != null">
+                #{sellerId,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null">
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productStatus != null">
+                #{productStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="productType != null">
+                #{productType,jdbcType=VARCHAR},
+            </if>
+            <if test="productDesc != null">
+                #{productDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="productPrice != null">
+                #{productPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="productNventory != null">
+                #{productNventory,jdbcType=VARCHAR},
+            </if>
+            <if test="productSnapshot != null">
+                #{productSnapshot,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateDate != null">
+                #{lastUpdateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
 </mapper>
