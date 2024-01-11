@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * 
@@ -126,6 +127,7 @@ public class ProductPO implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", productName=").append(productName);
         sb.append(", productType=").append(productType);
+        sb.append(", productStatus=").append(productStatus);
         sb.append(", productDesc=").append(productDesc);
         sb.append(", productPrice=").append(productPrice);
         sb.append(", productNventory=").append(productNventory);

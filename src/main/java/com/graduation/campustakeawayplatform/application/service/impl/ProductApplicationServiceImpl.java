@@ -22,6 +22,13 @@ public class ProductApplicationServiceImpl implements ProductApplicationService 
 
     @Override
     public List<ProductPO> selectAllProduct(RequestPageParam pageParam) {
-        return productDomainService.selectAllProduct(pageParam);
+
+        //查询出结果
+        List<ProductPO> productPOS = productDomainService.selectAllProduct(pageParam);
+
+        //上层应用加一层缓存
+
+
+        return productPOS;
     }
 }

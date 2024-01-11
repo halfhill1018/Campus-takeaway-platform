@@ -11,6 +11,7 @@ import java.util.List;
  * @Describe
  */
 public interface ProductDomainService {
+
     List<ProductPO> selectAllProduct(RequestPageParam pageParam);
 
 }
