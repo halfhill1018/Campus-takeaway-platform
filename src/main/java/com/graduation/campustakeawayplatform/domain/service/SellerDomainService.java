@@ -16,4 +16,12 @@ public interface SellerDomainService {
      */
     boolean ProductRelease(ProductPO productPO);
 
+    /**
+     * 商品下架
+     * @param productId
+     * @param sellerId
+     * @return
+     */
+    boolean productDown(String productId, String sellerId);
+
 }

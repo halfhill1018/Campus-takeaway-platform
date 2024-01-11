@@ -15,6 +15,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 @Mapper
 public interface ProductMapper extends BaseMapper<ProductPO> {
 
+    /**
+     * 商品上架
+     * @param productPO
+     * @return
+     */
     int insertSelective(ProductPO productPO);
 
     /**
@@ -53,6 +58,16 @@ public interface ProductMapper extends BaseMapper<ProductPO> {
     List<ProductPO> selectAllByProductNameAndSellerId(@Param("productName") String productName, @Param("sellerId") String sellerId);
 
 
+    /**
+     * 根据商品id和卖家id下架
+     * @param productStatus
+     * @param id
+     * @param sellerId
+     * @return
+     */
+    int updateProductStatusByIdAndSellerId(@Param("productStatus") Integer productStatus, @Param("id") String id, @Param("sellerId") String sellerId);
+
+    ProductPO selectProductStatusById(@Param("id") String id);
 
 }
 

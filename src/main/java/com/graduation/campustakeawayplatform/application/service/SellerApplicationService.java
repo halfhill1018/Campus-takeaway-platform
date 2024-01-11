@@ -8,5 +8,7 @@ import com.graduation.campustakeawayplatform.domain.repository.PO.ProductPO;
  * @Describe
  */
 public interface SellerApplicationService {
-    boolean ProductRelease(ProductPO productPO);
+    boolean productRelease(ProductPO productPO);
+
+    boolean productDown(String productId,String sellerId);
 }

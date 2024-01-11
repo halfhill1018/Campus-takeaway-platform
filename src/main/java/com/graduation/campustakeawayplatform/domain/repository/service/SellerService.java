@@ -13,4 +13,8 @@ public interface SellerService extends IService<SellerPO> {
 
     boolean productRelease(ProductPO productPO);
 
+    boolean updateProductStatus(Integer productStatus, String productId, String sellerId);
+
+    boolean checkProductStatus (String productId);
+
 }

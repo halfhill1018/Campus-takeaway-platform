@@ -2,6 +2,7 @@ package com.graduation.campustakeawayplatform.domain.repository.service.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.graduation.campustakeawayplatform.common.enu.UserEnum;
 import com.graduation.campustakeawayplatform.common.hutool.IdGenerator;
 import com.graduation.campustakeawayplatform.domain.repository.PO.UserPO;
 import com.graduation.campustakeawayplatform.domain.repository.service.UserService;
@@ -46,8 +47,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO>
 
             //密码哈希处理
             logger.info("入库参数:{}", JSON.toJSONString(userPO));
-            String encodePassword = bCryptPasswordEncoder.encode(userPO.getPassWord());
-            userPO.setPassWord(encodePassword);
+            String encodePassword = bCryptPasswordEncoder.encode(userPO.getPassWord()); //密码进行哈希
+            userPO.setPassWord(encodePassword); //哈希后的密码
+            userPO.setEnableFlag(UserEnum.USER_ENABLE_FLAG); //默认状态开启
 
             //插入数据库
             int result = userMapper.insertSelective(userPO);
@@ -55,7 +57,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO>
             return "注册成功";
 
         }catch (Exception e){
-            throw new RuntimeException("注册异常");
+            throw new RuntimeException("注册异常",e);
         }
 
 

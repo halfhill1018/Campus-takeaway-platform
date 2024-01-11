@@ -129,4 +129,17 @@
             </if>
         </trim>
     </insert>
+    <update id="updateProductStatusByIdAndSellerId">
+        update product
+        set product_status = #{productStatus,jdbcType=NUMERIC}
+        where
+        id = #{id,jdbcType=VARCHAR}
+        AND seller_id = #{sellerId,jdbcType=VARCHAR}
+    </update>
+    <select id="selectProductStatusById" resultMap="BaseResultMap">
+        select product_status
+        from product
+        where
+        id = #{id,jdbcType=VARCHAR}
+    </select>
 </mapper>

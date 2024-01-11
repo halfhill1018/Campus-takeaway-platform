@@ -11,4 +11,9 @@ public class ProductEnum {
      * 商品状态为上架
      */
     public final static Integer PRODUCT_STATUS_UP = 0;
+
+    /**
+     * 商品状态为下架
+     */
+    public final static Integer PRODUCT_STATUS_DOWN = 1;
 }

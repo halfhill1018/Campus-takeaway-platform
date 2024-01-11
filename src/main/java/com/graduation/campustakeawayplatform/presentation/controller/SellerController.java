@@ -2,8 +2,8 @@ package com.graduation.campustakeawayplatform.presentation.controller;
 
 import com.graduation.campustakeawayplatform.application.service.SellerApplicationService;
 import com.graduation.campustakeawayplatform.domain.repository.PO.ProductPO;
-import com.graduation.campustakeawayplatform.domain.repository.service.SellerService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -24,8 +24,18 @@ public class SellerController {
      * @return
      */
     @PostMapping("/productRelease")
-    public boolean ProductRelease(ProductPO productPO){
-        return sellerApplicationService.ProductRelease(productPO);
+    public boolean productRelease( ProductPO productPO){
+        return sellerApplicationService.productRelease(productPO);
     }
 
+    /**
+     * 商品下架
+     * @param productId 商品id
+     * @param sellerId 卖家id
+     * @return
+     */
+    @PostMapping("/productDown")
+    public boolean productDown(@RequestParam("productId") String productId, @RequestParam("sellerId")String sellerId){
+        return sellerApplicationService.productDown(productId,sellerId);
+    }
 }

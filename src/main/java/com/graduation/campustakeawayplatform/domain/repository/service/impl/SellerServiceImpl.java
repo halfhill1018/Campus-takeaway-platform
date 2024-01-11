@@ -9,11 +9,9 @@ import com.graduation.campustakeawayplatform.domain.repository.service.SellerSer
 import com.graduation.campustakeawayplatform.domain.repository.mapper.SellerMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
-import java.util.Objects;
+
 
 /**
 * @author he
@@ -38,6 +36,26 @@ public class SellerServiceImpl extends ServiceImpl<SellerMapper, SellerPO>
         Integer result = productMapper.insertSelective(productPO);
 
         return result == 1;
+    }
+
+    @Override
+    public boolean updateProductStatus(Integer productStatus, String productId, String sellerId) {
+
+        Integer result = productMapper.updateProductStatusByIdAndSellerId(productStatus,productId,sellerId);
+
+        if (result == 1){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkProductStatus(String productId) {
+        ProductPO productPOS = productMapper.selectProductStatusById(productId);
+        if (productPOS.getProductStatus() == 1){
+            return false;
+        }
+        return true;
     }
 }
 
