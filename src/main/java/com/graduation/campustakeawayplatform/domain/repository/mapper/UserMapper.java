@@ -22,6 +22,7 @@ public interface UserMapper extends BaseMapper<UserPO> {
 
     UserPO selectPassWordByLoginName(@Param("loginName") String loginName);
 
+    UserPO selectIdByLoginName(@Param("loginName") String loginName);
 }
 
 

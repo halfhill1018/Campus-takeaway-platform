@@ -1,6 +1,7 @@
 package com.graduation.campustakeawayplatform.domain.service;
 
 import com.graduation.campustakeawayplatform.domain.repository.PO.ProductPO;
+import com.graduation.campustakeawayplatform.domain.repository.PO.SellerPO;
 
 /**
  * @Author qinziwen
@@ -23,5 +24,13 @@ public interface SellerDomainService {
      * @return
      */
     boolean productDown(String productId, String sellerId);
+
+    /**
+     * 用户注册为商家
+     * @param token
+     * @param sellerPO
+     * @return
+     */
+    boolean userToSeller(String token, SellerPO sellerPO);
 
 }

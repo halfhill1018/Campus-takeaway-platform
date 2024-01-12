@@ -4,6 +4,7 @@ import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.graduation.campustakeawayplatform.common.enu.UserEnum;
 import com.graduation.campustakeawayplatform.common.hutool.IdGenerator;
+import com.graduation.campustakeawayplatform.common.jwt.JwtUtil;
 import com.graduation.campustakeawayplatform.domain.repository.PO.UserPO;
 import com.graduation.campustakeawayplatform.domain.repository.service.UserService;
 import com.graduation.campustakeawayplatform.domain.repository.mapper.UserMapper;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Objects;
 
 /**
 * @author he
@@ -71,15 +73,41 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO>
         //查询数据库密码拿出来比较
         UserPO userPOS = userMapper.selectPassWordByLoginName(userPO.getLoginName());
         logger.info("hash password: {}",JSON.toJSONString(userPOS));
+
         boolean matchesResult = bCryptPasswordEncoder.matches(userPO.getPassWord(), userPOS.getPassWord());
 
+        //生成token
+        String loginToken = JwtUtil.generateToken(userPO.getLoginName());
+
         //结果判断
-        if (matchesResult){return "登录成功";}
+        if (matchesResult){return loginToken;}
 
         return "登录失败";
     }
 
+    @Override
+    public boolean verifyUserCount(String loginName) {
+
+        List<UserPO> userPOS = userMapper.selectLoginNameByLoginName(loginName);
+
+        if (Objects.isNull(userPOS) || userPOS.size() != 1){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String selectUserId(String loginName) {
+
+        UserPO userPO = userMapper.selectIdByLoginName(loginName);
+        if (Objects.nonNull(userPO)){
+            return userPO.getId();
+        }
+        return null;
+    }
+
     protected void checkUserNameAndPassword(UserPO userPO){
+
         if (!userPO.checkAccount(userPO)){
             throw new RuntimeException("请输入正确的账号密码");
         }

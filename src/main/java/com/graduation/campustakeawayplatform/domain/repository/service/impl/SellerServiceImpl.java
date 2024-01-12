@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.Objects;
 
 
 /**
@@ -27,6 +28,9 @@ public class SellerServiceImpl extends ServiceImpl<SellerMapper, SellerPO>
 
     @Resource
     ProductMapper productMapper;
+
+    @Resource
+    SellerMapper sellerMapper;
 
     @Override
     public boolean productRelease(ProductPO productPO) {
@@ -53,6 +57,25 @@ public class SellerServiceImpl extends ServiceImpl<SellerMapper, SellerPO>
     public boolean checkProductStatus(String productId) {
         ProductPO productPOS = productMapper.selectProductStatusById(productId);
         if (productPOS.getProductStatus() == 1){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String selectSellerIdByShopName(String shopName) {
+
+        SellerPO sellerPO = sellerMapper.selectIdByShopName(shopName);
+        if (Objects.nonNull(sellerPO)){
+            return sellerPO.getId();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean initSellerInfo(SellerPO sellerPO) {
+        int result = sellerMapper.insertSelective(sellerPO);
+        if (result != 1){
             return false;
         }
         return true;

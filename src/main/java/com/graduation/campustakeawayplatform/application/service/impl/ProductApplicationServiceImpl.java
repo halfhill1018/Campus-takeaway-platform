@@ -31,4 +31,15 @@ public class ProductApplicationServiceImpl implements ProductApplicationService 
 
         return productPOS;
     }
+
+    @Override
+    public List<ProductPO> selectProductByShopName(String shopName) {
+
+        //校验参数
+        if (shopName.isEmpty()){
+            throw new RuntimeException("参数校验不通过");
+        }
+        return productDomainService.selectProductByShopName(shopName);
+
+    }
 }

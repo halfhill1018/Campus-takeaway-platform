@@ -2,6 +2,7 @@ package com.graduation.campustakeawayplatform.application.service.impl;
 
 import com.graduation.campustakeawayplatform.application.service.SellerApplicationService;
 import com.graduation.campustakeawayplatform.domain.repository.PO.ProductPO;
+import com.graduation.campustakeawayplatform.domain.repository.PO.SellerPO;
 import com.graduation.campustakeawayplatform.domain.repository.service.impl.UserServiceImpl;
 import com.graduation.campustakeawayplatform.domain.service.SellerDomainService;
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 
 /**
  * @Author qinziwen
@@ -32,13 +34,11 @@ public class SellerApplicationServiceImpl implements SellerApplicationService {
     public boolean productDown(String productId, String sellerId) {
         try {
 
-
             // 上层就做好参数校验
-            boolean validateResult = this.validateParameters(productId, sellerId);
+            this.validateParameters(productId, sellerId);
 
             //调领域下架
             sellerDomainService.productDown(productId, sellerId);
-
 
         }catch (Exception e){
             logger.info("下架发生异常: ",e);
@@ -47,6 +47,15 @@ public class SellerApplicationServiceImpl implements SellerApplicationService {
         return true;
     }
 
+    @Override
+    public boolean userToSeller(String token, SellerPO sellerPO) {
+        if (token.isEmpty() || Objects.isNull(sellerPO)){
+            logger.info("注册商家参数校验不通过");
+            return false;
+        }
+        return sellerDomainService.userToSeller(token,sellerPO);
+
+    }
 
 
     public  boolean validateParameters(Object... args) {

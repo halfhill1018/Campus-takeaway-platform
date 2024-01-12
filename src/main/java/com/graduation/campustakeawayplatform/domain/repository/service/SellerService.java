@@ -17,4 +17,8 @@ public interface SellerService extends IService<SellerPO> {
 
     boolean checkProductStatus (String productId);
 
+    String selectSellerIdByShopName(String shopNam);
+
+    boolean initSellerInfo(SellerPO sellerPO);
+
 }

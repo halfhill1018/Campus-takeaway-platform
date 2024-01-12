@@ -11,5 +11,8 @@ import java.util.List;
  * @Describe
  */
 public interface ProductApplicationService {
+
     List<ProductPO> selectAllProduct(RequestPageParam pageParam);
+
+    List<ProductPO> selectProductByShopName(String shopName);
 }

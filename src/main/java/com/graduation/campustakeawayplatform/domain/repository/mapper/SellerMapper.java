@@ -42,6 +42,8 @@ public interface SellerMapper extends BaseMapper<SellerPO> {
      */
     List<SellerPO> selectIdAndShopName();
 
+    SellerPO selectIdByShopName(@Param("shopName") String shopName);
+
 
 }
 

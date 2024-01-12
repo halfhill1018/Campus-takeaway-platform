@@ -144,4 +144,5 @@
         where
         id = #{id,jdbcType=VARCHAR}
     </select>
+
 </mapper>

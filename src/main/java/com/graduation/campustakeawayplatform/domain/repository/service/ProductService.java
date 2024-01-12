@@ -15,5 +15,7 @@ public interface ProductService extends IService<ProductPO> {
 
     List<ProductPO> selectAllProduct(RequestPageParam pageParam);
 
+    List<ProductPO> selectProductBySeller(String sellerId);
+
 
 }

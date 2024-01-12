@@ -62,4 +62,10 @@ id = #{id,jdbcType=VARCHAR}
         select id, shop_name
         from seller
     </select>
+    <select id="selectIdByShopName" resultMap="BaseResultMap">
+        select id
+        from seller
+        where
+        shop_name = #{shopName,jdbcType=VARCHAR}
+    </select>
 </mapper>

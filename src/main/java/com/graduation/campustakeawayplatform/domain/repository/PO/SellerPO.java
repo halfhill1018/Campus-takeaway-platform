@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
+
 import lombok.Data;
 
 /**
@@ -54,13 +56,13 @@ public class SellerPO implements Serializable {
      * 创建时间
      */
     @TableField(value = "create_date")
-    private LocalDateTime createDate;
+    private Date createDate;
 
     /**
      * 最后更新时间
      */
     @TableField(value = "last_update_date")
-    private LocalDateTime lastUpdateDate;
+    private Date lastUpdateDate;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

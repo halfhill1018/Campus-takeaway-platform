@@ -14,5 +14,8 @@ public interface UserService extends IService<UserPO> {
 
     String login(UserPO userPO);
 
+    boolean verifyUserCount(String loginName);
+
+    String selectUserId(String loginName);
 
 }

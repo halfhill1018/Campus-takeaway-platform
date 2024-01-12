@@ -30,6 +30,13 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, ProductPO>
     public List<ProductPO> selectAllProduct(RequestPageParam pageParam) {
         return productMapper.selectAll(pageParam);
     }
+
+    @Override
+    public List<ProductPO> selectProductBySeller(String sellerId) {
+
+       return productMapper.selectAllBySellerId(sellerId);
+
+    }
 }
 
 

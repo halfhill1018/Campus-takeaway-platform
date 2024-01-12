@@ -9,6 +9,8 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Component;
+
+import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -105,6 +107,32 @@ public class CaffeineCacheUtil {
             caffeineCache.evict(key);
         }
     }
+
+
+    /**
+     * 删除指定前缀开头的所有缓存键值对
+     *
+     * @param cacheName 缓存名称
+     * @param keyPrefix  前缀
+     */
+    public void evictKeysWithPrefix(String cacheName, String keyPrefix) {
+        Cache caffeineCache = getCaffeineCache(cacheName);
+        if (caffeineCache != null) {
+            // 获取Caffeine原生缓存对象
+            com.github.benmanes.caffeine.cache.Cache nativeCache = (com.github.benmanes.caffeine.cache.Cache) caffeineCache.getNativeCache();
+
+            // 迭代处理缓存键，删除符合前缀条件的键值对
+            Iterator<Object> iterator = nativeCache.asMap().keySet().iterator();
+            while (iterator.hasNext()) {
+                Object key = iterator.next();
+                if (key instanceof String && ((String) key).startsWith(keyPrefix)) {
+                    iterator.remove(); // 删除匹配前缀的键
+                    nativeCache.invalidate(key); // 同时删除对应的值
+                }
+            }
+        }
+    }
+
 
 
 }

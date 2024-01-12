@@ -44,7 +44,7 @@ public interface ProductMapper extends BaseMapper<ProductPO> {
     List<ProductPO> selectAllByProductType(@Param("productType") String productType);
 
     /**
-     * 根据商品类型获取商品
+     * 根据商品名字获取商品
      * @param productName
      * @return
      */
@@ -74,6 +74,14 @@ public interface ProductMapper extends BaseMapper<ProductPO> {
      * @return
      */
     ProductPO selectProductStatusById(@Param("id") String id);
+
+    /**
+     * 店铺名查卖家id
+     * @param shopName
+     * @return
+     */
+    ProductPO selectIdByShopName(@Param("shopName") String shopName);
+
 
 }
 

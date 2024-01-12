@@ -1,9 +1,13 @@
 package com.graduation.campustakeawayplatform.domain.service.impl;
 
+import com.graduation.campustakeawayplatform.common.caffeine.CaffeineCacheUtil;
 import com.graduation.campustakeawayplatform.common.enu.ProductEnum;
 import com.graduation.campustakeawayplatform.common.hutool.IdGenerator;
+import com.graduation.campustakeawayplatform.common.jwt.JwtUtil;
 import com.graduation.campustakeawayplatform.domain.repository.PO.ProductPO;
+import com.graduation.campustakeawayplatform.domain.repository.PO.SellerPO;
 import com.graduation.campustakeawayplatform.domain.repository.service.SellerService;
+import com.graduation.campustakeawayplatform.domain.repository.service.UserService;
 import com.graduation.campustakeawayplatform.domain.service.SellerDomainService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +35,12 @@ public class SellerDomainServiceImpl implements SellerDomainService {
     @Resource
     IdGenerator idGenerator;
 
+    @Resource
+    CaffeineCacheUtil caffeineCache;
+
+    @Resource
+    UserService userService;
+
     @Override
     @Transactional
     public boolean ProductRelease(ProductPO productPO) {
@@ -40,8 +50,15 @@ public class SellerDomainServiceImpl implements SellerDomainService {
             if (!StringUtils.isEmpty(productPO.getId())){
 
                 this.checkProductReUptInfo(productPO); //必要信息校验
+
                 //商品id不为空就是重新上架
-                return sellerService.updateProductStatus(ProductEnum.PRODUCT_STATUS_UP,productPO.getId(),productPO.getSellerId());
+                boolean releaseResult = sellerService.updateProductStatus(ProductEnum.PRODUCT_STATUS_UP, productPO.getId(), productPO.getSellerId());
+
+                //清除查询缓存
+                caffeineCache.evictKeysWithPrefix(CaffeineCacheUtil.DEFAULT_CACHE_NAME,"productCache");
+
+                return releaseResult;
+
 
             }else {
 
@@ -56,6 +73,9 @@ public class SellerDomainServiceImpl implements SellerDomainService {
 
                 //发布
                 sellerService.productRelease(productPO);
+
+                //清除查询缓存
+                caffeineCache.evictKeysWithPrefix(CaffeineCacheUtil.DEFAULT_CACHE_NAME,"productCache");
             }
 
         }catch (Exception e){
@@ -67,8 +87,42 @@ public class SellerDomainServiceImpl implements SellerDomainService {
     @Override
     @Transactional
     public boolean productDown(String productId, String sellerId) {
-       return sellerService.updateProductStatus(ProductEnum.PRODUCT_STATUS_DOWN,productId,sellerId);
 
+        //下架
+        boolean downResult = sellerService.updateProductStatus(ProductEnum.PRODUCT_STATUS_DOWN, productId, sellerId);
+
+        //清除查询缓存
+        caffeineCache.evictKeysWithPrefix(CaffeineCacheUtil.DEFAULT_CACHE_NAME,"productCache");
+
+        return downResult;
+
+
+    }
+
+    @Override
+    public boolean userToSeller(String token, SellerPO sellerPO) {
+
+        //解析token得到用户名
+        String verifyToken = JwtUtil.verifyToken(token);
+
+        //校验用户名是否存在
+        boolean verifyResult = userService.verifyUserCount(verifyToken);
+        if (!verifyResult){
+            logger.info("用户名不存在");
+            return false;
+        }
+
+        //查询用户id
+        String userId = userService.selectUserId(verifyToken);
+        sellerPO.setUserId(userId);
+        sellerPO.setId(idGenerator.generateId());
+
+        //卖家数据写库
+        boolean initSellerInfoResult = sellerService.initSellerInfo(sellerPO);
+        if (!initSellerInfoResult){
+            return false;
+        }
+        return true;
     }
 
     /**

@@ -2,7 +2,9 @@ package com.graduation.campustakeawayplatform.presentation.controller;
 
 import com.graduation.campustakeawayplatform.application.service.SellerApplicationService;
 import com.graduation.campustakeawayplatform.domain.repository.PO.ProductPO;
+import com.graduation.campustakeawayplatform.domain.repository.PO.SellerPO;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +22,7 @@ public class SellerController {
     SellerApplicationService sellerApplicationService;
 
     /**
-     * 发布商品
+     * 发布商品/重新上架
      * @return
      */
     @PostMapping("/productRelease")
@@ -37,5 +39,16 @@ public class SellerController {
     @PostMapping("/productDown")
     public boolean productDown(@RequestParam("productId") String productId, @RequestParam("sellerId")String sellerId){
         return sellerApplicationService.productDown(productId,sellerId);
+    }
+
+    /**
+     * 用户注册为商家
+     * @param token
+     * @param sellerPO
+     * @return
+     */
+    @PostMapping("/userToSeller")
+    public boolean userToSeller(@RequestParam("token") String token, @RequestBody SellerPO sellerPO){
+        return sellerApplicationService.userToSeller(token,sellerPO);
     }
 }

@@ -23,13 +23,6 @@
     </sql>
 
 
-<select id="selectLoginNameByLoginName" resultMap="BaseResultMap">
-select login_name
-from user
-where
-login_name = #{loginName,jdbcType=VARCHAR}
-</select>
-
 <insert id="insertSelective">
 insert into user
 <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -57,6 +50,18 @@ values
 </insert>
     <select id="selectPassWordByLoginName" resultMap="BaseResultMap">
         select pass_word
+        from user
+        where
+        login_name = #{loginName,jdbcType=VARCHAR}
+    </select>
+    <select id="selectLoginNameByLoginName" resultMap="BaseResultMap">
+        select login_name
+        from user
+        where
+        login_name = #{loginName,jdbcType=VARCHAR}
+    </select>
+    <select id="selectIdByLoginName" resultMap="BaseResultMap">
+        select id
         from user
         where
         login_name = #{loginName,jdbcType=VARCHAR}

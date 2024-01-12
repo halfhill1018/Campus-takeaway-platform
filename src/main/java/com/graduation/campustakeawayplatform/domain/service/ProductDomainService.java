@@ -14,4 +14,6 @@ public interface ProductDomainService {
 
     List<ProductPO> selectAllProduct(RequestPageParam pageParam);
 
+    List<ProductPO> selectProductByShopName(String shopName);
+
 }
